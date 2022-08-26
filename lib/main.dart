@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app_test/screens/avatar_screen.dart';
+import 'package:movie_app_test/screens/favorite_screen.dart';
+import 'package:movie_app_test/screens/movie_screen.dart';
+import 'screens/character_screen.dart';
 
 void main() {
   runApp(const MovieApp());
@@ -9,21 +13,21 @@ class MovieApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       home: MovieAppCharacterScreen(),
       debugShowCheckedModeBanner: false,
     );
   }
 }
 
-class MovieAppCharacterScreen extends StatelessWidget {
+class MovieAppCharacterScreen extends StatefulWidget {
+  const MovieAppCharacterScreen({Key? key}) : super(key: key);
 
-  final tabViews = <String>[
-    'Filmes', 'Personagens', 'Favoritos'
-  ];
+  @override
+  State<MovieAppCharacterScreen> createState() => _MovieAppCharacterScreenState();
+}
 
-  MovieAppCharacterScreen({Key? key}) : super(key: key);
-
+class _MovieAppCharacterScreenState extends State<MovieAppCharacterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,16 +36,15 @@ class MovieAppCharacterScreen extends StatelessWidget {
           children: [
             SizedBox(
               child: Padding(
-                padding: const EdgeInsets.only(top: 2, left: 8, right: 8),
+                padding: const EdgeInsets.only(top: 30, left: 2),
                 child: Row(
                   children: [
                     Container(
                       decoration: BoxDecoration(
-                        borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(15), bottomRight: Radius.circular(15)),
+                        borderRadius: const BorderRadius.only(topLeft: Radius.circular(15)),
                         border: Border.all(width: 1, color: Colors.black),
                       ),
-                      width: 100,
+                      width: 115,
                       height: 35,
                       child: TextButton(
                           onPressed: () {},
@@ -51,40 +54,98 @@ class MovieAppCharacterScreen extends StatelessWidget {
                           )),
                     ),
                     const Spacer(),
-                    const CircleAvatar(
-                      foregroundColor: Colors.black,
-                      backgroundImage: NetworkImage(
-                          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiZfk_mBRRAnMVpDjIrMbiU5DUxjWeZ5nqRQ&usqp=CAU'),
-                      radius: 35,
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const AvatarScreen()),
+                        );
+                      },
+                      child: const CircleAvatar(
+                        foregroundColor: Colors.black,
+                        backgroundImage: NetworkImage(
+                            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiZfk_mBRRAnMVpDjIrMbiU5DUxjWeZ5nqRQ&usqp=CAU'),
+                        radius: 35,
+                      ),
                     ),
                   ],
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(top:35.0, left: 2, right: 2),
-              child: SizedBox(
-                height: 40,
-                width: double.maxFinite,
-                child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: tabViews.length,
-                    itemBuilder: ((context, index) {
-                      return Container(
-                        margin: const EdgeInsets.all(2),
-                        width: 100,
-                        height: 35,
-                        decoration: BoxDecoration(
-                          borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(15), bottomRight: Radius.circular(15)),
+            DefaultTabController(
+              length: 3,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 35.0, left: 2, right: 2),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.transparent,
+                    border: Border.all(width: 1, color: Colors.black),
+                  ),
+                  width: double.infinity,
+                  child: Column(
+                    children: [
+                      TabBar(
+                        indicator: BoxDecoration(
+                          color: Colors.green[100],
                           border: Border.all(width: 1, color: Colors.black),
                         ),
-                        child: Center(child: Text(tabViews[index])),
-                      );
-                    })),
+                        tabs: [
+                          PageSelector(title: 'Filmes'),
+                          PageSelector(title: 'Personagens'),
+                          PageSelector(title: 'Favoritos'),
+                        ],
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 5),
+                        child: Center(
+                          child: SizedBox(
+                            width: 350,
+                            height: MediaQuery.of(context).size.height * 0.7,
+                            child: TabBarView(children: [
+                              const MovieScreen(),
+                              CharacterScreen(),
+                              FavoriteScreen()
+                            ]),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
               ),
-            )
+            ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+// ignore: must_be_immutable
+class PageSelector extends StatefulWidget {
+  String title;
+
+  PageSelector({
+    Key? key,
+    required this.title,
+  }) : super(key: key);
+
+  @override
+  State<PageSelector> createState() => _PageSelectorState();
+}
+
+class _PageSelectorState extends State<PageSelector> {
+  bool colorEnabled = false;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.all(2),
+      width: 115,
+      height: 35,
+      child: Center(
+        child: Text(
+          widget.title,
+          style: const TextStyle(color: Colors.black, fontSize: 16),
         ),
       ),
     );
