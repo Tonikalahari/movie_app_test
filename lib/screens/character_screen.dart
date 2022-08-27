@@ -1,24 +1,38 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:movie_app_test/http/http_model.dart';
+import 'package:movie_app_test/http/http_request.dart';
 
 import '../models/list_vew_model.dart';
 
 class CharacterScreen extends StatefulWidget {
-  CharacterScreen({Key? key}) : super(key: key);
+  const CharacterScreen({Key? key}) : super(key: key);
 
   @override
   State<CharacterScreen> createState() => _CharacterScreenState();
 }
-List characters = ['Luke Skywalker','G-3PO','Darth Vader'];
+
 class _CharacterScreenState extends State<CharacterScreen> {
+  CharacterListApi webCharacters = CharacterListApi();
+
   @override
   Widget build(BuildContext context) {
-    return  ListView.builder(
-      itemCount: characters.length,
-      itemBuilder:(context, index) {
-      return ListViewModel(
-            title: characters[index],
-            icon: Icons.favorite_border_outlined,
-          );
-    });
+    return FutureBuilder<List>(
+        future: webCharacters.getCharacters(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            final List<DataModelCharacter> characters = snapshot.data as List<DataModelCharacter>;
+            if (characters.isNotEmpty) {
+              ListView.builder(
+                itemCount: snapshot.data!.length,
+                itemBuilder: ((context, index) {
+                  return ListViewModel(title: snapshot.data![index]["name"], icon: Icons.favorite_border_outlined);
+                }),
+              );
+            }
+          }
+          return const Center(child: CircularProgressIndicator(semanticsLabel: 'Unknown error',));
+        });
   }
 }

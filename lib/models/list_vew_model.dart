@@ -22,7 +22,7 @@ class _ListViewModelState extends State<ListViewModel> {
       padding: const EdgeInsets.all(8.0),
       child: Container(
         decoration: BoxDecoration(
-          border: Border.all(width: 1, color: Colors.black),
+          border: Border.all(width: 1, color: Colors.white),
         ),
         width: 300,
         height: 75,
@@ -39,6 +39,7 @@ class _ListViewModelState extends State<ListViewModel> {
                       widget.title,
                       style: const TextStyle(
                         fontSize: 20,
+                        color: Colors.white
                       ),
                     ),
                   ),
@@ -48,6 +49,7 @@ class _ListViewModelState extends State<ListViewModel> {
                   icon: Icon(
                     widget.icon,
                     size: 40,
+                    color: Colors.white
                   ),
                 ),
               ],

@@ -1,22 +1,24 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:fluttermoji/fluttermoji.dart';
+import 'package:movie_app_test/screens/web_site_view.dart';
 
-class AvatarScreen extends StatefulWidget {
-  const AvatarScreen({Key? key}) : super(key: key);
+import 'avatar_screen.dart';
+
+class SiteScreen extends StatefulWidget {
+  const SiteScreen({Key? key}) : super(key: key);
 
   @override
-  State<AvatarScreen> createState() => _AvatarScreenState();
+  State<SiteScreen> createState() => _SiteScreenState();
 }
 
-class _AvatarScreenState extends State<AvatarScreen> {
+class _SiteScreenState extends State<SiteScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
         color: Colors.black,
         child: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
           child: Column(
             children: [
               SizedBox(
@@ -39,34 +41,27 @@ class _AvatarScreenState extends State<AvatarScreen> {
                             )),
                       ),
                       const Spacer(),
-                      FluttermojiCircleAvatar(
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const AvatarScreen()),
+                        );
+                      },
+                      child:FluttermojiCircleAvatar(
                         backgroundColor: Colors.grey[800],
                         radius: 35,
                       ),
+                    ),
                     ],
                   ),
                 ),
               ),
-             Column(children: [
-                 FluttermojiCircleAvatar(
-                  backgroundColor: Colors.grey[800],
-                 ),
-                 const SizedBox(height: 20,),
-                FluttermojiCustomizer(
-                  scaffoldHeight: MediaQuery.of(context).size.height * 0.6, 
-                  scaffoldWidth: MediaQuery.of(context).size.width * 0.98,
-                  autosave: false,
-                  theme: FluttermojiThemeData(
-                    labelTextStyle: const TextStyle(
-                      color: Colors.white,
-                    ),
-                    primaryBgColor: Colors.black.withOpacity(0.4),
-                    secondaryBgColor: Colors.grey[800],
-                      boxDecoration: const BoxDecoration(
-                        borderRadius: BorderRadius.only(topLeft: Radius.circular(15), topRight: Radius.circular(15)),
-                      )),
-                )
-               ],),
+              SizedBox(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height,
+                child: const WebSitePageView(),
+               ),
             ],
           ),
         ),
@@ -74,3 +69,5 @@ class _AvatarScreenState extends State<AvatarScreen> {
     );
   }
 }
+
+
