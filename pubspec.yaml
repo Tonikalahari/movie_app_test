@@ -31,6 +31,7 @@ dependencies:
     sdk: flutter
   fluttermoji:
   sqflite:
+  path_provider: 
   http:
   flutter_inappwebview:
   http_interceptor:

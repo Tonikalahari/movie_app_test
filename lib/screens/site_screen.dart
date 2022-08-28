@@ -28,7 +28,7 @@ class _SiteScreenState extends State<SiteScreen> {
                     children: [
                       Container(
                         decoration: BoxDecoration(
-                          borderRadius: const BorderRadius.only(topLeft: Radius.circular(15)),
+                          borderRadius: const BorderRadius.only(topLeft: Radius.circular(10)),
                           border: Border.all(width: 1, color: Colors.white),
                         ),
                         width: 115,

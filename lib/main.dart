@@ -47,7 +47,7 @@ class _MovieAppCharacterScreenState extends State<MovieAppCharacterScreen> {
                     children: [
                       Container(
                         decoration: BoxDecoration(
-                          borderRadius: const BorderRadius.only(topLeft: Radius.circular(15)),
+                          borderRadius: const BorderRadius.all( Radius.circular(5)),
                           border: Border.all(width: 1, color: Colors.white),
                         ),
                         width: 115,
@@ -85,7 +85,7 @@ class _MovieAppCharacterScreenState extends State<MovieAppCharacterScreen> {
                   padding: const EdgeInsets.only(top: 35.0, left: 2, right: 2),
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: const BorderRadius.only(topLeft: Radius.circular(15), topRight: Radius.circular(15)),
+                      borderRadius: const BorderRadius.only(topLeft: Radius.circular(5), topRight: Radius.circular(5)),
                       color: Colors.transparent,
                       border: Border.all(width: 1, color: Colors.white),
                     ),
@@ -94,7 +94,7 @@ class _MovieAppCharacterScreenState extends State<MovieAppCharacterScreen> {
                       children: [
                         TabBar(
                           indicator: BoxDecoration(
-                            borderRadius: const BorderRadius.only(topLeft: Radius.circular(15), topRight: Radius.circular(15)),
+                            borderRadius: const BorderRadius.only(topLeft: Radius.circular(5), topRight: Radius.circular(5)),
                             color: Colors.white.withOpacity(0.5),
                             border: Border.all(width: 1, color: Colors.white),
                           ),
@@ -110,8 +110,8 @@ class _MovieAppCharacterScreenState extends State<MovieAppCharacterScreen> {
                             child: SizedBox(
                               width: 350,
                               height: MediaQuery.of(context).size.height * 0.73,
-                              child: TabBarView(children: [
-                                const MovieScreen(),
+                              child: const TabBarView(children: [
+                                MovieScreen(),
                                 CharacterScreen(),
                                 FavoriteScreen()
                               ]),

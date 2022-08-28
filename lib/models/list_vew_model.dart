@@ -4,16 +4,20 @@ import 'package:flutter/material.dart';
 // ignore: must_be_immutable
 class ListViewModel extends StatefulWidget {
   String title;
-  IconData icon;
+  IconButton? icon;
+  Function onPressed;
   ListViewModel({
     Key? key,
     required this.title,
-    required this.icon,
+    this.icon,
+    required this.onPressed,
   }) : super(key: key);
 
   @override
   State<ListViewModel> createState() => _ListViewModelState();
 }
+
+bool isPressed = false;
 
 class _ListViewModelState extends State<ListViewModel> {
   @override
@@ -37,20 +41,19 @@ class _ListViewModelState extends State<ListViewModel> {
                   child: Center(
                     child: Text(
                       widget.title,
-                      style: const TextStyle(
-                        fontSize: 20,
-                        color: Colors.white
-                      ),
+                      style: const TextStyle(fontSize: 20, color: Colors.white),
                     ),
                   ),
                 ),
                 IconButton(
-                  onPressed: () {},
-                  icon: Icon(
-                    widget.icon,
-                    size: 40,
-                    color: Colors.white
-                  ),
+                  onPressed: () {
+                    setState(() {
+                      isPressed = true;
+                    });
+                  },
+                  icon: isPressed == true
+                      ? const Icon(Icons.favorite, size: 40, color: Colors.white)
+                      : const Icon(Icons.favorite_outline, size: 40, color: Colors.white),
                 ),
               ],
             ),

@@ -26,5 +26,5 @@ class LoggingInterceptor implements InterceptorContract {
 
 final Client client = InterceptedClient.build(
   interceptors: [LoggingInterceptor()],
-  requestTimeout: const Duration(seconds: 3),
+  requestTimeout: const Duration(seconds: 5),
 );
