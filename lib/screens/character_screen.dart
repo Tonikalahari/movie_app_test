@@ -2,7 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:movie_app_test/http/http_request.dart';
+import 'package:movie_app_test/screens/favorite_screen.dart';
 
+import '../database/database.dart';
 import '../database/favorite_model.dart';
 import '../models/list_vew_model.dart';
 
@@ -15,12 +17,14 @@ class CharacterScreen extends StatefulWidget {
 
 class _CharacterScreenState extends State<CharacterScreen> {
   CharacterListApi webCharacters = CharacterListApi();
+
   @override
   void initState() {
     webCharacters.getCharacters();
     super.initState();
   }
 
+  bool isPressed = false;
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List>(
@@ -32,10 +36,16 @@ class _CharacterScreenState extends State<CharacterScreen> {
               return ListView.builder(
                 itemCount: characters.length,
                 itemBuilder: ((context, index) {
-                  return ListViewModel(
-                    title: characters[index]['name'],
-                    onPressed: () async {
-                      await DataBaseHelper.instance.addFavorite(characters[index]);
+                  return GestureDetector(
+                    child: ListViewModel(
+                      title: characters[index]['name'],
+                    ),
+                    onTap: () async {
+                      await FavoriteDao.instance.add(Favorit(
+                        name: characters[index]['name'],
+                      ));
+                      // .then((value) => Navigator.push(
+                      //     context, MaterialPageRoute(builder: (_) => const FavoriteScreen())));
                     },
                   );
                 }),

@@ -1,16 +1,13 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class ListViewModel extends StatefulWidget {
   String title;
-  IconButton? icon;
-  Function onPressed;
+  IconData? icon;
   ListViewModel({
     Key? key,
     required this.title,
     this.icon,
-    required this.onPressed,
   }) : super(key: key);
 
   @override
@@ -51,9 +48,9 @@ class _ListViewModelState extends State<ListViewModel> {
                       isPressed = true;
                     });
                   },
-                  icon: isPressed == true
-                      ? const Icon(Icons.favorite, size: 40, color: Colors.white)
-                      : const Icon(Icons.favorite_outline, size: 40, color: Colors.white),
+                    icon: isPressed == true
+                        ? const Icon(Icons.favorite, size: 40, color: Colors.white)
+                        : const Icon(Icons.favorite_outline, size: 40, color: Colors.white),
                 ),
               ],
             ),

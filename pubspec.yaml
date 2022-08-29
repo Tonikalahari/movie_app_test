@@ -30,7 +30,7 @@ dependencies:
   flutter:
     sdk: flutter
   fluttermoji:
-  sqflite:
+  sqflite: 
   path_provider: 
   http:
   flutter_inappwebview:
