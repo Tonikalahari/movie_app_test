@@ -6,3 +6,4 @@ o projeto conta ainda com a biblioteca fluttermoji (https://pub.dev/packages/flu
 Obs: O projeto Ainda nessecita de melhorias na parte de persistencia de dados.
 
 
+um arquivo Apk será disponibilizado nos arquivos do commit.
