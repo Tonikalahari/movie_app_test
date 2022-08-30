@@ -1,16 +1,9 @@
-# movie_app_test
+Esse é um projeto que que tem o proposito de construir uma aplicação capaz de integrar a Ui com as informações da web Api StarWar Api (https://swapi.dev/documentation#people, https://swapi.dev/documentation#films) juntamente com a persistência de dados usando o SQflite como banco de dados local,
 
-A new Flutter project.
+o projeto conta ainda com a biblioteca fluttermoji (https://pub.dev/packages/fluttermoji) que consiste na customização de avatares.
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+Obs: O projeto Ainda nessecita de melhorias na parte de persistencia de dados.
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+um arquivo Apk será disponibilizado nos arquivos do commit.
