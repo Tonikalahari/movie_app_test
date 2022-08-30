@@ -11,7 +11,7 @@ class FavoriteDao {
   static final FavoriteDao instance = FavoriteDao._privateConstroctor();
 
   static Database? _database;
-
+  //o operador ??= atribui o valor apenas se for nulo
   Future<Database> get database async => _database ??= await _initDatabase();
 
   Future<Database> _initDatabase() async {
@@ -21,7 +21,7 @@ class FavoriteDao {
   }
 
   Future _onCreate(Database db, int version) async {
-    await db.execute('CREATE TABLE favoriteTable(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT)');
+    await db.execute('CREATE TABLE favoriteTable(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, type INTEGER)');
   }
 
   Future<void> add(Favorit favorit) async {
@@ -31,26 +31,24 @@ class FavoriteDao {
       favorit.toMap(),
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
-   
   }
 
   Future<List<Favorit>> getFavorit() async {
     final db = await database;
-
     final List<Map<String, dynamic>> maps = await db.query('favoriteTable');
 
     return List.generate(maps.length, (i) {
       return Favorit(
         id: maps[i]['id'],
         name: maps[i]['name'],
+        type: maps[i]['type']
       );
     });
   }
+
 
   Future<int> remove(int id) async {
     Database db = await instance.database;
     return await db.delete('favoriteTable', where: 'id = ?', whereArgs: [id]);
   }
-
-  
 }

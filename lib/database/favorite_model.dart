@@ -1,21 +1,23 @@
-
 class Favorit {
-  final int? id;
-  final String name;
-  
+  int? id;
+  String name;
+  int type;
 
-  const Favorit({
-     this.id,
+  Favorit({
+    this.id,
     required this.name,
+    required this.type,
   });
   Map<String, dynamic> toMap() {
     return {
       'id': id,
       'name': name,
+      'type' : type,
     };
   }
+
   @override
   String toString() {
-    return 'Favorit{id: $id, name: $name,}';
+    return 'Favorit{id: $id, name: $name, type: $type}';
   }
 }

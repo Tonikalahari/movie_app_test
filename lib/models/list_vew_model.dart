@@ -4,17 +4,19 @@ import 'package:flutter/material.dart';
 class ListViewModel extends StatefulWidget {
   String title;
   IconData? icon;
+  bool? isPressed = false;
+  Color? color;
   ListViewModel({
     Key? key,
     required this.title,
     this.icon,
+    this.isPressed,
+    this.color,
   }) : super(key: key);
 
   @override
   State<ListViewModel> createState() => _ListViewModelState();
 }
-
-bool isPressed = false;
 
 class _ListViewModelState extends State<ListViewModel> {
   @override
@@ -23,7 +25,7 @@ class _ListViewModelState extends State<ListViewModel> {
       padding: const EdgeInsets.all(8.0),
       child: Container(
         decoration: BoxDecoration(
-          border: Border.all(width: 1, color: Colors.white),
+          border: Border.all(width: 1, color: widget.color == null ? Colors.white : widget.color!),
         ),
         width: 300,
         height: 75,
@@ -45,12 +47,10 @@ class _ListViewModelState extends State<ListViewModel> {
                 IconButton(
                   onPressed: () {
                     setState(() {
-                      isPressed = true;
+                     widget.isPressed = true;
                     });
                   },
-                    icon: isPressed == true
-                        ? const Icon(Icons.favorite, size: 40, color: Colors.white)
-                        : const Icon(Icons.favorite_outline, size: 40, color: Colors.white),
+                  icon: Icon(widget.icon!, size: 40, color: Colors.white),
                 ),
               ],
             ),

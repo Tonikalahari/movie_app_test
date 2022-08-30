@@ -7,7 +7,7 @@ import '../models/list_vew_model.dart';
 // ignore: must_be_immutable
 class FavoriteScreen extends StatefulWidget {
   const FavoriteScreen({Key? key}) : super(key: key);
-  
+
   @override
   State<FavoriteScreen> createState() => _FavoriteScreenState();
 }
@@ -19,15 +19,29 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
         future: FavoriteDao.instance.getFavorit(),
         builder: (BuildContext context, snapshot) {
           if (snapshot.hasData) {
-            List favorites = snapshot.data!;
-            // ignore: avoid_print
-            print('===========>${favorites.toString()}');
+            // o resultado deve ser tipado para que possamos acessar seus atributos.
+            List<Favorit> favorites = snapshot.data!;
             return ListView.builder(
                 itemCount: favorites.length,
                 itemBuilder: (context, index) {
-                  return ListViewModel(
-                    title: favorites.toString(),
-                    icon: Icons.favorite,
+                  return GestureDetector(
+                    onLongPress: () {
+                      setState(() {
+                        FavoriteDao.instance.remove(favorites[index].id!).then((value) {
+                          final snackBar = SnackBar(
+                              content: const Text('Favorito removido'),
+                              action: SnackBarAction(
+                                  label: 'Ok', textColor: Colors.white, onPressed: () {}));
+                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        });
+                        context.widget;
+                      });
+                    },
+                    child: ListViewModel(
+                      title: favorites[index].name,
+                      icon: Icons.favorite_rounded,
+                      color: favorites[index].type == 1 ? Colors.green : Colors.red,
+                    ),
                   );
                 });
           }

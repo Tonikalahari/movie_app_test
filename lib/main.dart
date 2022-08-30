@@ -155,7 +155,7 @@ class _PageSelectorState extends State<PageSelector> {
       child: Center(
         child: Text(
           widget.title,
-          style: const TextStyle(color: Colors.white, fontSize: 16),
+          style: const TextStyle(color: Colors.white, fontSize: 12),
         ),
       ),
     );

@@ -1,6 +1,6 @@
-
 import 'package:flutter/material.dart';
 import 'package:fluttermoji/fluttermoji.dart';
+import 'package:movie_app_test/screens/site_screen.dart';
 
 class AvatarScreen extends StatefulWidget {
   const AvatarScreen({Key? key}) : super(key: key);
@@ -31,7 +31,10 @@ class _AvatarScreenState extends State<AvatarScreen> {
                         width: 115,
                         height: 35,
                         child: TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) => const SiteScreen()));
+                            },
                             child: const Text(
                               'Site Oficial',
                               style: TextStyle(color: Colors.white),
@@ -46,26 +49,38 @@ class _AvatarScreenState extends State<AvatarScreen> {
                   ),
                 ),
               ),
-             Column(children: [
-                 FluttermojiCircleAvatar(
-                  backgroundColor: Colors.grey[800],
-                 ),
-                 const SizedBox(height: 20,),
-                FluttermojiCustomizer(
-                  scaffoldHeight: MediaQuery.of(context).size.height * 0.6, 
-                  scaffoldWidth: MediaQuery.of(context).size.width * 0.98,
-                  autosave: false,
-                  theme: FluttermojiThemeData(
-                    labelTextStyle: const TextStyle(
-                      color: Colors.white,
+              Column(
+                children: [
+                  FluttermojiCircleAvatar(
+                    backgroundColor: Colors.grey[800],
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 250, bottom: 10),
+                    child: FluttermojiSaveWidget(
+                      splashColor: Colors.white,
+                      onTap: () {},
                     ),
-                    primaryBgColor: Colors.black.withOpacity(0.4),
-                    secondaryBgColor: Colors.grey[800],
-                      boxDecoration: const BoxDecoration(
-                        borderRadius: BorderRadius.only(topLeft: Radius.circular(15), topRight: Radius.circular(15)),
-                      )),
-                )
-               ],),
+                  ),
+                  FluttermojiCustomizer(
+                    scaffoldHeight: MediaQuery.of(context).size.height * 0.58,
+                    scaffoldWidth: MediaQuery.of(context).size.width * 0.98,
+                    autosave: false,
+                    theme: FluttermojiThemeData(
+                        labelTextStyle: const TextStyle(
+                          color: Colors.white,
+                        ),
+                        primaryBgColor: Colors.black.withOpacity(0.4),
+                        secondaryBgColor: Colors.grey[800],
+                        boxDecoration: const BoxDecoration(
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(15), topRight: Radius.circular(15)),
+                        )),
+                  )
+                ],
+              ),
             ],
           ),
         ),

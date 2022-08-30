@@ -15,16 +15,16 @@ class MovieScreen extends StatefulWidget {
 
 class _MovieScreenState extends State<MovieScreen> {
   MovieListApi webMovies = MovieListApi();
-
+ 
   @override
   void initState() {
     webMovies.getMovies();
     super.initState();
   }
 
-  bool isPressed = false;
   @override
   Widget build(BuildContext context) {
+   
     return FutureBuilder<List>(
         future: webMovies.getMovies(),
         builder: (context, snapshot) {
@@ -33,17 +33,24 @@ class _MovieScreenState extends State<MovieScreen> {
               final List movies = snapshot.data!.toList();
               return ListView.builder(
                 itemCount: movies.length,
-                itemBuilder: ((context, index) {
-                  return GestureDetector(
+                itemBuilder: ((context, index) {  
+                  return GestureDetector(  
                     child: ListViewModel(
                       title: movies[index]['title'],
+                      icon:  Icons.favorite_outline,
                     ),
                     onTap: () async {
-                      await FavoriteDao.instance.add(Favorit(
-                        name: movies[index]['title'],
-                      ));
-                      // .then((value) => Navigator.push(
-                      //     context, MaterialPageRoute(builder: (_) => const FavoriteScreen())));
+                      await FavoriteDao.instance
+                          .add(Favorit(
+                        name: movies[index]['title'], type: 2,
+                      ))
+                          .then((_) {  
+                        final snackBar = SnackBar(
+                            content: const Text('Favorito adicionado'),
+                            action: SnackBarAction(
+                                label: 'Ok', textColor: Colors.white, onPressed: () {}));
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      });
                     },
                   );
                 }),

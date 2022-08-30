@@ -17,35 +17,43 @@ class CharacterScreen extends StatefulWidget {
 
 class _CharacterScreenState extends State<CharacterScreen> {
   CharacterListApi webCharacters = CharacterListApi();
-
+  
   @override
   void initState() {
     webCharacters.getCharacters();
     super.initState();
   }
 
-  bool isPressed = false;
   @override
   Widget build(BuildContext context) {
+    
     return FutureBuilder<List>(
         future: webCharacters.getCharacters(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             if (snapshot.data!.isNotEmpty) {
-              final List characters = snapshot.data!.toList();
+              final List characters = snapshot.data!;
               return ListView.builder(
                 itemCount: characters.length,
                 itemBuilder: ((context, index) {
                   return GestureDetector(
                     child: ListViewModel(
                       title: characters[index]['name'],
+                      icon: Icons.favorite_outline,
                     ),
                     onTap: () async {
-                      await FavoriteDao.instance.add(Favorit(
-                        name: characters[index]['name'],
-                      ));
-                      // .then((value) => Navigator.push(
-                      //     context, MaterialPageRoute(builder: (_) => const FavoriteScreen())));
+                      await FavoriteDao.instance
+                          .add(Favorit(
+                        name: characters[index]['name'], type: 1,
+                      ))
+                          .then((value) {
+                        final snackBar = SnackBar(
+                            content: const Text('Favorito adicionado'),
+                            action: SnackBarAction(label: 'Ok',
+                            textColor: Colors.white,
+                             onPressed: () {}));
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      });
                     },
                   );
                 }),
