@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:movie_app_test/database/favorite_model.dart';
 import 'package:movie_app_test/http/http_request.dart';
 import 'package:movie_app_test/models/list_vew_model.dart';
-import 'package:movie_app_test/screens/favorite_screen.dart';
 
 import '../database/database.dart';
 
