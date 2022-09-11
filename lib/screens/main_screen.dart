@@ -1,9 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttermoji/fluttermojiCircleAvatar.dart';
-import 'package:movie_app_test/models/site_screen.dart';
 
-import 'avatar_screen.dart';
 import 'character_screen.dart';
 import 'favorite_screen.dart';
 import 'movie_screen.dart';

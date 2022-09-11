@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:fluttermoji/fluttermoji.dart';
-import 'package:movie_app_test/models/site_screen.dart';
 
 class AvatarScreen extends StatefulWidget {
   const AvatarScreen({Key? key}) : super(key: key);
