@@ -3,14 +3,12 @@ import 'package:flutter/material.dart';
 // ignore: must_be_immutable
 class ListViewModel extends StatefulWidget {
   String title;
-  IconData? icon;
-  bool? isPressed = false;
+  IconData icon;
   Color? color;
   ListViewModel({
     Key? key,
     required this.title,
-    this.icon,
-    this.isPressed,
+    required this.icon,
     this.color,
   }) : super(key: key);
 
@@ -45,12 +43,8 @@ class _ListViewModelState extends State<ListViewModel> {
                   ),
                 ),
                 IconButton(
-                  onPressed: () {
-                    setState(() {
-                     widget.isPressed = true;
-                    });
-                  },
-                  icon: Icon(widget.icon!, size: 40, color: Colors.white),
+                  onPressed: () {},
+                  icon: Icon(widget.icon, size: 40, color: Colors.white),
                 ),
               ],
             ),

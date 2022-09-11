@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttermoji/fluttermoji.dart';
-import 'package:movie_app_test/screens/site_screen.dart';
+import 'package:movie_app_test/models/site_screen.dart';
 
 class AvatarScreen extends StatefulWidget {
   const AvatarScreen({Key? key}) : super(key: key);
@@ -32,8 +32,7 @@ class _AvatarScreenState extends State<AvatarScreen> {
                         height: 35,
                         child: TextButton(
                             onPressed: () {
-                              Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) => const SiteScreen()));
+                              Navigator.pushNamed(context, 'site');
                             },
                             child: const Text(
                               'Site Oficial',
@@ -59,9 +58,14 @@ class _AvatarScreenState extends State<AvatarScreen> {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 250, bottom: 10),
-                    child: FluttermojiSaveWidget(
-                      splashColor: Colors.white,
-                      onTap: () {},
+                    child: GestureDetector(
+                      child: FluttermojiSaveWidget(
+                        splashColor: Colors.white,
+                        onTap: () {
+                          Future.delayed(const Duration(microseconds: 300))
+                              .then((value) => Navigator.pushNamed(context, 'home'));
+                        },
+                      ),
                     ),
                   ),
                   FluttermojiCustomizer(

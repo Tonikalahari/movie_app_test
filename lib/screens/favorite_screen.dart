@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app_test/database/favorite_model.dart';
+import 'package:movie_app_test/models/favorite_model.dart';
 
-import '../database/database.dart';
+import '../database/favorite_database.dart';
 import '../models/list_vew_model.dart';
 
 // ignore: must_be_immutable
@@ -39,7 +39,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                     },
                     child: ListViewModel(
                       title: favorites[index].name,
-                      icon: Icons.favorite_rounded,
+                      icon: Icons.favorite,
                       color: favorites[index].type == 1 ? Colors.green : Colors.red,
                     ),
                   );
