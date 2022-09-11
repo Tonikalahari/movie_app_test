@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:fluttermoji/fluttermoji.dart';
 import 'package:movie_app_test/screens/web_site_view.dart';
 
-import '../screens/avatar_screen.dart';
 
 class SiteScreen extends StatefulWidget {
   const SiteScreen({Key? key}) : super(key: key);
